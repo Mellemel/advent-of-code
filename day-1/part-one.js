@@ -1,5 +1,4 @@
 import { getInputData }  from '../lib.js';
-
 const inputData = await getInputData(import.meta.url);
 const entries = inputData.split('\n').map(parseFloat);
 
