@@ -1,4 +1,27 @@
 {
+  "name": "my-first-advent-of-code",
+  "version": "1.0.0",
+  "description": "Advent of Code 2020",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mellemel/my-first-advent-of-code.git"
+  },
+  "keywords": [
+    "advent",
+    "advent2020",
+    "adventofcode2020"
+  ],
+  "author": "someFakeEmailAddress@MockEmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Mellemel/my-first-advent-of-code/issues"
+  },
+  "homepage": "https://github.com/Mellemel/my-first-advent-of-code#readme",
   "dependencies": {
     "node": "^15.4.0"
   }

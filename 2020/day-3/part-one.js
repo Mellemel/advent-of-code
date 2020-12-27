@@ -1,4 +1,4 @@
-import { getInputData } from '../lib.js';
+import { getInputData } from '../../lib.js';
 
 const inputData = await getInputData(import.meta.url);
 
