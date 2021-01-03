@@ -2,8 +2,6 @@ import { getInputData } from '../../lib.js';
 
 const inputData = await getInputData(import.meta.url);
 
-const requiredFields = new Set(['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid'])
-
 const parseRow = (row = '') => {
     return row
         .split(' ')
@@ -30,17 +28,36 @@ const parseInput = () => {
     }, []);
 }
 
-const validatePassports = (passports = []) => {
+export const PASSPORT_FIELDS = Object.freeze({
+    byr: 'byr',
+    iyr: 'iyr',
+    eyr: 'eyr',
+    hgt: 'hgt',
+    hcl: 'hcl',
+    ecl: 'ecl',
+    pid: 'pid',
+    cid: 'cid'
+});
+
+const REQUIRED_FIELDS = Object.keys(PASSPORT_FIELDS).filter(field => field !== 'cid');
+
+export const validator = (passport) => {
+    const passportFields = new Set(Object.keys(passport))
+    const hasRequiredFields = new Set(REQUIRED_FIELDS.filter(field => !passportFields.has(field))).size === 0;
+    return hasRequiredFields;
+};
+
+export const getValidPassportCount = (passports = [], runPassportValidation = () => { }) => {
     return passports.reduce((count, passport) => {
-        const passportFields = new Set(Object.keys(passport));
-        const a_difference_b = new Set([...requiredFields].filter(field => !passportFields.has(field)))
-        if (a_difference_b.size === 0) {
+        const isValidPassport = runPassportValidation(passport);
+        if (isValidPassport) {
             count++;
         }
         return count;
     }, 0);
 }
 
-const passports = parseInput();
-const validPassports = validatePassports(passports) + 1; // plus your own lol
+export const passports = parseInput();
+
+const validPassports = getValidPassportCount(passports, validator) + 1; // plus your own lol
 console.log(validPassports);
